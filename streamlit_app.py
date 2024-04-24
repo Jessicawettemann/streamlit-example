@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Die URL Ihrer Modell-API
-API_URL = "http://Ihre-API-URL/predict"
+API_URL = "http://https://chat.openai.com/g/g-wn8pp4t4P-grafikdesigner/predict"
 
 def get_model_response(text):
     # Senden einer POST-Anfrage an Ihre GPT-API
