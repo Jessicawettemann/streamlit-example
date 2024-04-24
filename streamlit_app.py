@@ -1,6 +1,4 @@
 import streamlit as st
-import random
-import time
 
-st.title("Simple chat")
-
+with st.chat_message("user"):
+    st.write("Hello 👋")
