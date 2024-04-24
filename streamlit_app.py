@@ -1,7 +1,10 @@
+import openai
 import streamlit as st
 
 st.title("Echo Bot")
-
+openai.api_key = st.secrets["sk-proj-pQI1YjcgDoXVNQi7yItQT3BlbkFJJ2lNaeeKsio08lXRoPRs"]
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] = "gpt-4.0-turbo"
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
