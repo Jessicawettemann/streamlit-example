@@ -1,29 +1,23 @@
-import openai
 import streamlit as st
+import requests
 
-st.title("Echo Bot")
-openai.api_key = st.secrets["sk-proj-pQI1YjcgDoXVNQi7yItQT3BlbkFJJ2lNaeeKsio08lXRoPRs"]
-if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-4.0-turbo"
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+# Die URL Ihrer Modell-API
+API_URL = "http://Ihre-API-URL/predict"
 
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+def get_model_response(text):
+    # Senden einer POST-Anfrage an Ihre GPT-API
+    response = requests.post(API_URL, json={"text": text})
+    # Stellen Sie sicher, dass Ihre API die Antwort im richtigen Format zurückgibt
+    return response.json()['response']
 
-# React to user input
-if prompt := st.chat_input("What is up?"):
-    # Display user message in chat message container
-    st.chat_message("user").markdown(prompt)
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
+st.title('Mein Custom GPT Interface')
 
-    response = f"Echo: {prompt}"
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        st.markdown(response)
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+# Erstellen eines Texteingabefeldes für den Benutzer
+user_input = st.text_area("Text eingeben", "Hier Text eingeben...")
+
+# Erstellen eines Buttons, um die Anfrage zu senden
+if st.button('Antwort erhalten'):
+    # Abrufen der Antwort vom Modell
+    response = get_model_response(user_input)
+    # Anzeigen der Antwort
+    st.text_area("Antwort", response, height=300)
