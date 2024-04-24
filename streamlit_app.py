@@ -1,3 +1,5 @@
+pip install streamlit
+
 from dataclasses import dataclass
 from typing import Literal
 import streamlit as st
