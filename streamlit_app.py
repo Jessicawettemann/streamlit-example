@@ -3,8 +3,7 @@ import requests
 import os
 
 API_URL = "https://chat.openai.com/g/g-wn8pp4t4P-grafikdesigner/predict"
-API_KEY = os.getenv("API_KEY")  # Lesen des Schlüssels aus den Umgebungsvariablen
-
+API_KEY = os.getenv('OPENAI_API_KEY')  
 def get_model_response(text):
     headers = {
         "Authorization": f"Bearer {API_KEY}"
