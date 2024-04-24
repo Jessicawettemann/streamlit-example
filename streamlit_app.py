@@ -30,7 +30,7 @@ def get_model_response(text):
 
 st.title('Mein Custom GPT Interface')
 
-user_input = st.text_area("Text eingeben", "Hier Text eingeben...")
+user_input = st.text_area("Text eingeben")
 if st.button('Antwort erhalten'):
     response = get_model_response(user_input)
     st.text_area("Antwort", response, height=300)
