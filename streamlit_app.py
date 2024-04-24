@@ -1,14 +1,21 @@
 import streamlit as st
 import requests
 
-# Die URL Ihrer Modell-API
-API_URL = "http://https://chat.openai.com/g/g-wn8pp4t4P-grafikdesigner/predict"
+# Korrekte URL Ihrer Modell-API
+API_URL = "https://chat.openai.com/g/g-wn8pp4t4P-grafikdesigner/predict"
 
 def get_model_response(text):
-    # Senden einer POST-Anfrage an Ihre GPT-API
-    response = requests.post(API_URL, json={"text": text})
-    # Stellen Sie sicher, dass Ihre API die Antwort im richtigen Format zurückgibt
-    return response.json()['response']
+    try:
+        # Senden einer POST-Anfrage an Ihre GPT-API
+        response = requests.post(API_URL, json={"text": text})
+        # Überprüfen des Statuscodes der Antwort
+        if response.status_code == 200:
+            # Stellen Sie sicher, dass Ihre API die Antwort im richtigen Format zurückgibt
+            return response.json()['response']
+        else:
+            return f"Fehler: API antwortete mit Statuscode {response.status_code}"
+    except Exception as e:
+        return f"Ausnahme aufgetreten: {str(e)}"
 
 st.title('Mein Custom GPT Interface')
 
