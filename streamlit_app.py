@@ -1,4 +1,4 @@
-pip install streamlit
+# pip install streamlit
 
 from dataclasses import dataclass
 from typing import Literal
