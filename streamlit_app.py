@@ -1,23 +1,27 @@
-import streamlit as st
-import requests
+import openai
+from openai import OpenAI
 import os
+
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
+
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
 
 API_URL = "https://chat.openai.com/g/g-wn8pp4t4P-grafikdesigner/predict"
 
-import os
 
-# Abrufen des API-Schlüssels aus den Umgebungsvariablen
-API_KEY = os.getenv("API_KEY")
 
+client = OpenAI()
 # Überprüfen, ob der API-Schlüssel korrekt abgerufen wurde
-if not API_KEY:
+if not api_key:
     raise ValueError("API_KEY ist nicht in den Umgebungsvariablen definiert.")
 
 # Verwenden Sie API_KEY in Ihrer Anwendung
-print("Mein API-Schlüssel ist:", API_KEY)
+print("Mein API-Schlüssel ist:", api_key)
 def get_model_response(text):
     headers = {
-        "Authorization": f"Bearer {API_KEY}"
+        "Authorization": f"Bearer {api_key}"
     }
     try:
         response = requests.post(API_URL, json={"text": text}, headers=headers)
